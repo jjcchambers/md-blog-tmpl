@@ -1,4 +1,4 @@
-# pathmd-blog-tmpl
+# md-blog-tmpl
 
 A lightweight, modern markdown blog template. Write `.md` files, drop them in a
 folder, and they automatically appear on your blog. Deploys to **Cloudflare
