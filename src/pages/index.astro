@@ -1,0 +1,79 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PostCard from "../components/PostCard.astro";
+import { SITE } from "../lib/site";
+import { getAllPosts } from "../lib/posts";
+
+const posts = getAllPosts().slice(0, 6);
+---
+
+<BaseLayout title={SITE.title} rootTitle>
+  <section class="container hero">
+    <span class="tag">A Markdown Blog Template</span>
+    <h1>{SITE.title}</h1>
+    <p class="hero-tagline">{SITE.tagline}</p>
+    <div class="hero-cta">
+      <a class="btn" href="/blog/">Read the blog</a>
+      <a class="btn btn-ghost" href="/about/">About this template</a>
+    </div>
+  </section>
+
+  <section class="container-wide latest">
+    <header class="latest-header">
+      <h2>Latest posts</h2>
+      <a href="/blog/" class="muted">View all →</a>
+    </header>
+    <div class="post-grid">
+      {posts.map((post) => <PostCard post={post} />)}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    text-align: center;
+    padding-block: var(--space-7);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    align-items: center;
+  }
+  .hero h1 {
+    font-size: clamp(2.4rem, 6vw, 3.5rem);
+    background: linear-gradient(
+      135deg,
+      var(--text) 0%,
+      color-mix(in srgb, var(--accent) 80%, var(--text)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-tagline {
+    font-size: var(--fs-lg);
+    color: var(--text-muted);
+    max-width: 540px;
+    line-height: var(--lh-snug);
+  }
+  .hero-cta {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: var(--space-2);
+  }
+  .latest {
+    margin-top: var(--space-7);
+  }
+  .latest-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--space-5);
+  }
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-5);
+  }
+</style>

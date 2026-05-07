@@ -1,0 +1,33 @@
+{
+  // ===========================================================================
+  // Cloudflare Workers config for serving the built Astro site as static assets.
+  // Docs: https://developers.cloudflare.com/workers/static-assets/
+  //
+  // To deploy:
+  //   1. npx wrangler login   (one-time)
+  //   2. Edit "name" below to whatever you want your worker (subdomain) to be.
+  //      Final URL will be: https://<name>.<your-subdomain>.workers.dev
+  //   3. npm run deploy
+  // ===========================================================================
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "md-blog-tmpl",
+  "compatibility_date": "2025-01-01",
+
+  // No Worker script — Cloudflare will serve assets directly.
+  // If you later need server-side logic, add `"main": "./src/worker.ts"` and
+  // an entry script.
+  "assets": {
+    "directory": "./dist",
+
+    // When a request doesn't match a static file, serve `404.html` from dist.
+    // Astro generates this automatically from `src/pages/404.astro`.
+    "not_found_handling": "404-page",
+
+    // Redirect /foo.html -> /foo so URLs stay clean.
+    "html_handling": "auto-trailing-slash"
+  },
+
+  "observability": {
+    "enabled": true
+  }
+}

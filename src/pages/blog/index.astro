@@ -1,0 +1,64 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PostCard from "../../components/PostCard.astro";
+import { getTopics } from "../../lib/posts";
+
+const topics = getTopics();
+---
+
+<BaseLayout
+  title="Blog"
+  description="All posts, organized by topic."
+>
+  <div class="container-wide">
+    <header class="page-header">
+      <h1>All posts</h1>
+      <p class="muted">
+        Organized automatically by the directory each post lives in.
+      </p>
+    </header>
+
+    {
+      topics.map((group) => (
+        <section class="topic-section">
+          <header class="topic-header">
+            <h2>{group.topicLabel}</h2>
+            <span class="muted">
+              {group.posts.length} {group.posts.length === 1 ? "post" : "posts"}
+            </span>
+          </header>
+          <div class="post-grid">
+            {group.posts.map((post) => (
+              <PostCard post={post} />
+            ))}
+          </div>
+        </section>
+      ))
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  .page-header {
+    margin-bottom: var(--space-7);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .topic-section + .topic-section {
+    margin-top: var(--space-7);
+  }
+  .topic-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--border);
+  }
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-5);
+  }
+</style>

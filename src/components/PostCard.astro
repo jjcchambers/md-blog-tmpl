@@ -1,0 +1,87 @@
+---
+import { formatDate, type Post } from "../lib/posts";
+
+interface Props {
+  post: Post;
+}
+const { post } = Astro.props;
+const { frontmatter } = post;
+---
+
+<a class="post-card card" href={post.url}>
+  {
+    frontmatter.hero && (
+      <div class="post-card-hero">
+        <img src={frontmatter.hero} alt="" loading="lazy" />
+      </div>
+    )
+  }
+  <div class="post-card-body">
+    <div class="post-card-meta">
+      <span class="tag">{post.topicLabel}</span>
+      {
+        frontmatter.date && (
+          <time datetime={frontmatter.date}>{formatDate(frontmatter.date)}</time>
+        )
+      }
+    </div>
+    <h3 class="post-card-title">{frontmatter.title}</h3>
+    {
+      frontmatter.description && (
+        <p class="post-card-description">{frontmatter.description}</p>
+      )
+    }
+  </div>
+</a>
+
+<style>
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    padding: 0;
+  }
+  .post-card:hover {
+    color: inherit;
+  }
+  .post-card-hero {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--surface-2);
+  }
+  .post-card-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-base);
+  }
+  .post-card:hover .post-card-hero img {
+    transform: scale(1.03);
+  }
+  .post-card-body {
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    flex: 1;
+  }
+  .post-card-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+  }
+  .post-card-title {
+    font-size: var(--fs-lg);
+    font-weight: 700;
+    line-height: var(--lh-snug);
+  }
+  .post-card-description {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-snug);
+  }
+</style>

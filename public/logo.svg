@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" width="200" height="48">
+  <rect x="0" y="8" width="32" height="32" rx="8" fill="#2f6feb"/>
+  <path d="M8 30V18h3.2l3.6 7.2L18.4 18H21.6v12h-2.6v-7.4l-3 6h-1.4l-3-6V30H8Z" fill="white"/>
+  <text x="44" y="32" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="700" font-size="22" fill="#1a1a1a">md-blog</text>
+</svg>

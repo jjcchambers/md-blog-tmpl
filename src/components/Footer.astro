@@ -1,0 +1,47 @@
+---
+import { SITE } from "../lib/site";
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container-wide site-footer-inner">
+    <p class="muted">
+      &copy; {year}
+      {SITE.title}. Built with <a href="https://astro.build">Astro</a> and deployed
+      on <a href="https://workers.cloudflare.com/">Cloudflare</a>.
+    </p>
+    <ul class="footer-links" aria-label="Site links">
+      {
+        SITE.social.map((item) => (
+          <li>
+            <a href={item.href}>{item.label}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    padding-block: var(--space-5);
+    margin-top: var(--space-7);
+  }
+  .site-footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    font-size: var(--fs-sm);
+  }
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: var(--space-4);
+  }
+</style>
