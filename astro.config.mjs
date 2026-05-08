@@ -4,10 +4,12 @@ import sitemap from "@astrojs/sitemap";
 
 // IMPORTANT: change this to your deployed site URL.
 // It is used by the sitemap, RSS feed, and Open Graph meta tags.
-const SITE_URL = "https://example.com";
+const SITE_URL = process.env.PUBLIC_SITE_URL ?? "https://example.com";
+const BASE_PATH = process.env.PUBLIC_BASE_PATH ?? "/";
 
 export default defineConfig({
   site: SITE_URL,
+  base: BASE_PATH,
   integrations: [sitemap()],
   markdown: {
     shikiConfig: {

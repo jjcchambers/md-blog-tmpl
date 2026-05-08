@@ -1,4 +1,4 @@
-# pathmd-blog-tmpl
+# md-blog-tmpl
 
 A lightweight, modern markdown blog template. Write `.md` files, drop them in a
 folder, and they automatically appear on your blog. Deploys to **Cloudflare
@@ -292,6 +292,37 @@ rules in `wrangler.jsonc`):
 ```bash
 npm run cf-preview
 ```
+
+---
+
+## Demo deploy on GitHub Pages
+
+Cloudflare remains the primary deployment path, but you can also publish a demo
+version to GitHub Pages with zero impact on the Cloudflare setup.
+
+This repo includes a workflow at `.github/workflows/deploy-pages.yml` that
+builds `dist/` and deploys it to GitHub Pages.
+
+### One-time GitHub setup
+
+1. In your GitHub repo, go to **Settings → Pages**.
+2. Under **Build and deployment**, choose **GitHub Actions** as the source.
+3. In **Settings → Secrets and variables → Actions → Variables**, add:
+   - `PUBLIC_SITE_URL`
+   - `PUBLIC_BASE_PATH`
+
+### Variable values
+
+- If your repo is a **project page** (URL looks like
+  `https://<user>.github.io/<repo>/`):
+  - `PUBLIC_SITE_URL = https://<user>.github.io`
+  - `PUBLIC_BASE_PATH = /<repo>`
+- If your repo is a **user/org page** (URL looks like
+  `https://<user>.github.io/`):
+  - `PUBLIC_SITE_URL = https://<user>.github.io`
+  - `PUBLIC_BASE_PATH = /`
+
+Once set, every push to `main` will auto-deploy a demo site to GitHub Pages.
 
 ---
 
