@@ -324,6 +324,29 @@ builds `dist/` and deploys it to GitHub Pages.
 
 Once set, every push to `main` will auto-deploy a demo site to GitHub Pages.
 
+### Important URL note (project pages)
+
+If this repo is a project page (for example `md-blog-tmpl`), the demo URL is:
+
+`https://<user>.github.io/<repo>/`
+
+So for this template, it would be:
+
+`https://jjcchambers.github.io/md-blog-tmpl/`
+
+`https://<user>.github.io/` is a different site (your user/org page) and may
+show 404 if you do not have one configured.
+
+### Troubleshooting (unstyled page / missing images)
+
+If the demo loads but looks unstyled or images are missing, the base path is
+usually wrong. Verify your Actions variables:
+
+- `PUBLIC_SITE_URL = https://<user>.github.io`
+- `PUBLIC_BASE_PATH = /<repo>` (project pages) or `/` (user/org pages)
+
+Then re-run the GitHub Pages workflow and hard refresh the browser.
+
 ---
 
 ## Other useful commands
