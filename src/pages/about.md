@@ -31,4 +31,4 @@ I wanted a blog that:
 - Reasonable defaults for SEO + Open Graph
 - One-command Cloudflare deployment via `npm run deploy`
 
-See the [README](https://github.com/) for full setup instructions.
+See the [README](https://github.com/jjcchambers/md-blog-tmpl) for full setup instructions.
