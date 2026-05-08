@@ -1,5 +1,7 @@
 # md-blog-tmpl
 
+[![Live Demo](https://img.shields.io/badge/demo-live-2ea44f?style=for-the-badge)](https://jjcchambers.github.io/md-blog-tmpl/)
+
 A lightweight, modern markdown blog template. Write `.md` files, drop them in a
 folder, and they automatically appear on your blog. Deploys to **Cloudflare
 Workers** as pure static HTML — fast, free, and reliable.
