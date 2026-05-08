@@ -1,5 +1,6 @@
 ---
 import { SITE } from "../lib/site";
+import { isInternalPath, withBase } from "../lib/paths";
 const year = new Date().getFullYear();
 ---
 
@@ -14,7 +15,9 @@ const year = new Date().getFullYear();
       {
         SITE.social.map((item) => (
           <li>
-            <a href={item.href}>{item.label}</a>
+            <a href={isInternalPath(item.href) ? withBase(item.href) : item.href}
+              >{item.label}</a
+            >
           </li>
         ))
       }

@@ -2,6 +2,7 @@ import rss from "@astrojs/rss";
 import { SITE } from "../lib/site";
 import { getAllPosts } from "../lib/posts";
 import type { APIContext } from "astro";
+import { withBase } from "../lib/paths";
 
 export async function GET(context: APIContext) {
   const posts = getAllPosts();
@@ -15,7 +16,7 @@ export async function GET(context: APIContext) {
       pubDate: post.frontmatter.date
         ? new Date(post.frontmatter.date)
         : new Date(),
-      link: post.url,
+      link: withBase(post.url),
     })),
   });
 }

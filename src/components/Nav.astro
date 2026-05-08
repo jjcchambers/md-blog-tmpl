@@ -2,12 +2,14 @@
 import Logo from "./Logo.astro";
 import ThemeToggle from "./ThemeToggle.astro";
 import { SITE } from "../lib/site";
+import { withBase } from "../lib/paths";
 
 const { pathname } = Astro.url;
 
 function isActive(href: string): boolean {
-  if (href === "/") return pathname === "/";
-  return pathname === href || pathname.startsWith(href);
+  const target = withBase(href);
+  if (target === "/") return pathname === "/";
+  return pathname === target || pathname.startsWith(target);
 }
 ---
 
@@ -21,7 +23,7 @@ function isActive(href: string): boolean {
           SITE.primaryNav.map((item) => (
             <li>
               <a
-                href={item.href}
+                href={withBase(item.href)}
                 class:list={["nav-link", { active: isActive(item.href) }]}
               >
                 {item.label}

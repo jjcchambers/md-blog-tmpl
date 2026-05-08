@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PostCard from "../components/PostCard.astro";
 import { SITE } from "../lib/site";
 import { getAllPosts } from "../lib/posts";
+import { withBase } from "../lib/paths";
 
 const posts = getAllPosts().slice(0, 6);
 ---
@@ -13,15 +14,15 @@ const posts = getAllPosts().slice(0, 6);
     <h1>{SITE.title}</h1>
     <p class="hero-tagline">{SITE.tagline}</p>
     <div class="hero-cta">
-      <a class="btn" href="/blog/">Read the blog</a>
-      <a class="btn btn-ghost" href="/about/">About this template</a>
+      <a class="btn" href={withBase("/blog/")}>Read the blog</a>
+      <a class="btn btn-ghost" href={withBase("/about/")}>About this template</a>
     </div>
   </section>
 
   <section class="container-wide latest">
     <header class="latest-header">
       <h2>Latest posts</h2>
-      <a href="/blog/" class="muted">View all →</a>
+      <a href={withBase("/blog/")} class="muted">View all →</a>
     </header>
     <div class="post-grid">
       {posts.map((post) => <PostCard post={post} />)}
