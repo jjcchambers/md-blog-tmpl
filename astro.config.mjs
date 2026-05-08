@@ -4,8 +4,10 @@ import sitemap from "@astrojs/sitemap";
 
 // IMPORTANT: change this to your deployed site URL.
 // It is used by the sitemap, RSS feed, and Open Graph meta tags.
-const SITE_URL = process.env.PUBLIC_SITE_URL ?? "https://example.com";
-const BASE_PATH = process.env.PUBLIC_BASE_PATH ?? "/";
+const rawSiteUrl = process.env.PUBLIC_SITE_URL?.trim();
+const rawBasePath = process.env.PUBLIC_BASE_PATH?.trim();
+const SITE_URL = rawSiteUrl ? rawSiteUrl : "https://example.com";
+const BASE_PATH = rawBasePath ? rawBasePath : "/";
 
 export default defineConfig({
   site: SITE_URL,
