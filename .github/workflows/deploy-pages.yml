@@ -18,8 +18,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL }}
-      PUBLIC_BASE_PATH: ${{ vars.PUBLIC_BASE_PATH }}
+      # Allow manual overrides via repo variables, but provide safe defaults so
+      # GitHub Pages works even when variables are unset.
+      PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL != '' && vars.PUBLIC_SITE_URL || format('https://{0}.github.io', github.repository_owner) }}
+      PUBLIC_BASE_PATH: ${{ vars.PUBLIC_BASE_PATH != '' && vars.PUBLIC_BASE_PATH || format('/{0}', github.event.repository.name) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,6 +34,11 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Show resolved Pages config
+        run: |
+          echo "PUBLIC_SITE_URL=$PUBLIC_SITE_URL"
+          echo "PUBLIC_BASE_PATH=$PUBLIC_BASE_PATH"
 
       - name: Build site
         run: npm run build
